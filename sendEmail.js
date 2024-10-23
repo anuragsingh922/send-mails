@@ -30,15 +30,14 @@ const sendEmail = async (req, res) => {
     });
 
     if (response?.accepted?.length) {
-      console.log("Email sent:", response);
-      res.send(`Email sent to these emails: ${response.accepted.join(", ")}`);
+      res
+        .status(200)
+        .send(`Email sent to these emails: ${response.accepted.join(", ")}`);
     } else {
-      console.log("Failed to send email:", response);
-      res.send(`Failed to send the email.`);
+      res.status(400).send(`Failed to send the email.`);
     }
   } catch (error) {
-    console.log("Error in sending email : ", error);
-    res.send(`Failed to send the email. :` , error);
+    res.status(500).send(`Failed to send the email. :`, error);
   }
 };
 
